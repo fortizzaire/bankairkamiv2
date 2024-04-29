@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Bank Air Kami v2</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js"></script>
+</head>
+<body>
+    <div class="data-head">Bank Air Kami v2</div>
+    <div class="data-container">
+        <div class="data-item">
+            <h2>Suhu</h2>
+            <p class="value" id="suhu">74 &#8451;</p>
+        </div>
+        <div class="data-item">
+            <h2>pH</h2>
+            <p class="value" id="peha">4.66</p>
+        </div>
+        <div class="data-item">
+            <h2>Turbiditas</h2>
+            <p class="value" id="turbi">1221</p>
+        </div>
+        <div class="data-item">
+            <h2>Konduktivitas</h2>
+            <p class="value" id="kondukt">0.05</p>
+        </div>
+    </div>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyCA_EAhALPKQyBiN91WXmqSi_Bbac_KjAc",
+          authDomain: "bankairkamimcudirect.firebaseapp.com",
+          databaseURL: "https://bankairkamimcudirect-default-rtdb.asia-southeast1.firebasedatabase.app",
+          projectId: "bankairkamimcudirect",
+          storageBucket: "bankairkamimcudirect.appspot.com",
+          messagingSenderId: "313736410175",
+          appId: "1:313736410175:web:aa8ef92328c9aa51d6748a"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+
+        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
+        const db = getDatabase();
+        const avgTempCRef = ref(db, 'sensor/' + suhu + '/avgTempC');
+        onValue(avgTempCRef, (snapshot) => {
+            const data = snapshot.val();
+            updateAvgTempC(suhu, data);
+        });
+      </script>
+    
+</body>
+</html>
